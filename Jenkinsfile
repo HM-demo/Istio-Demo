@@ -6,8 +6,8 @@ pipeline {
            stage("ISTIO Deployment") {
                steps {
                     cleanWs()
+                    checkout scm
                sh ''' 
-                      git clone https://github.com/HM-demo/Istio-Demo
                       curl -L https://git.io/getLatestIstio | sh -
                       cd istio-0.5.1
                       kubectl apply -f install/kubernetes/istio.yaml
