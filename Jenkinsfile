@@ -7,13 +7,24 @@ pipeline {
                steps {
                     cleanWs()
                sh ''' 
-                      istioctl kube-inject -f samples/bookinfo/kube/bookinfo.yaml
-                      kubectl apply -f samples/bookinfo/kube/bookinfo.yaml
+                      git clone https://github.com/HM-demo/Istio-Demo
+                      curl -L https://git.io/getLatestIstio | sh -
+                      cd istio-0.5.1
+                      kubectl apply -f install/kubernetes/istio.yaml
+                      sleep 20
+                      export PATH=$PWD/bin:$PATH
+                      kubectl get all -n istio-system
+                      ls
+                      cd ../Istio-Demo
+                      istioctl kube-inject -f helloworld-v2.yaml
+                      kubectl apply -f helloworld-v2.yaml
+                      kubectl apply -f helloworld-svc.yaml
+                      istioctl replace -f route-traffic.yaml
                       sleep 60
-                      ISTIO_INGRESS=$(kubectl get ingress gateway -o jsonpath="{.status.loadBalancer.ingress[0].*}")
-                      for((i=1;i<=10;i+=1));do curl  -s http://$ISTIO_INGRESS/productpage >> mfile; done;
-                      a=$(grep 'full stars' mfile | wc -l) && echo Number of calls to v3 of reviews service "$(($a / 2))"
-                  '''
+                      INGRESS_URL=`kubectl get ingress helloworld -o jsonpath="{.status.loadBalancer.ingress[0].*}"`
+                      for i in {1..20}; do curl $INGRESS_URL/hello >>tmp; done
+                      cat tmp
+                      '''
         }
      }
    }
