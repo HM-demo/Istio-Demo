@@ -9,13 +9,10 @@ pipeline {
                     checkout scm
                sh ''' 
                       curl -L https://git.io/getLatestIstio | sh -
-                      cd istio-0.5.1
-                      kubectl apply -f install/kubernetes/istio.yaml
+                      kubectl apply -f istio-0.5.1/install/kubernetes/istio.yaml
                       sleep 20
                       export PATH=$PWD/bin:$PATH
                       kubectl get all -n istio-system
-                      ls
-                      cd ../Istio-Demo
                       istioctl kube-inject -f helloworld-v2.yaml
                       kubectl apply -f helloworld-v2.yaml
                       kubectl apply -f helloworld-svc.yaml
