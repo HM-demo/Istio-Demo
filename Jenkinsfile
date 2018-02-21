@@ -11,7 +11,7 @@ pipeline {
                       curl -L https://git.io/getLatestIstio | sh -
                       kubectl apply -f istio-0.5.1/install/kubernetes/istio.yaml
                       sleep 20
-                      export PATH=$PWD/bin:$PATH
+                      export PATH=$PWD/istio-0.5.1/bin:$PATH
                       kubectl get all -n istio-system
                       istioctl kube-inject -f helloworld-v2.yaml
                       kubectl apply -f helloworld-v2.yaml
