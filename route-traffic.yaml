@@ -7,8 +7,8 @@ spec:
     name: helloworld
   route:
   - labels:
-      version: v1
+      version: vCURRVERSION
     weight: 90
   - labels:
-      version: v2
+      version: vNEWVERSION
     weight: 10
