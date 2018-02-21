@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: helloworld
-        image: istio/examples-helloworld-${BUILD_ID}
+        image: istio/examples-helloworld-${VERSION}
         resources:
           requests:
             cpu: "100m"
