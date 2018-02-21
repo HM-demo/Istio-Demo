@@ -1,18 +1,18 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: helloworld-v1
+  name: helloworld-vIMGVERSION
 spec:
   replicas: 1
   template:
     metadata:
       labels:
         app: helloworld
-        version: v1
+        version: vIMGVERSION
     spec:
       containers:
       - name: helloworld
-        image: istio/examples-helloworld-${VERSION}
+        image: pavanraj29/helloworld:IMGVERSION
         resources:
           requests:
             cpu: "100m"
