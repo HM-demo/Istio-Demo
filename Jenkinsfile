@@ -24,7 +24,7 @@ pipeline {
                 sudo docker push ${image}:${VERSION}
                 sed -i -e 's/IMGVERSION/'${VERSION}'/g' helloworld-deploy.yaml
                 sed -i -e 's/NEWVERSION/'${VERSION}'/g' route-traffic-90-10.yaml
-                sed -i -e 's/NEWVERSION/'${VERSION}'/g' route-traffic-50-10.yaml
+                sed -i -e 's/NEWVERSION/'${VERSION}'/g' route-traffic-50-50.yaml
                 sed -i -e 's/NEWVERSION/'${VERSION}'/g' route-traffic-0-100.yaml
                 '''
                }   
@@ -35,7 +35,7 @@ pipeline {
                sh ''' 
                       CurrVersion=`kubectl get deploy helloworld -o jsonpath="{.spec.selector.matchLabels.version}"`
                       sed -i -e 's/CURRVERSION/'${CurrVersion}'/g' route-traffic-90-10.yaml
-                      sed -i -e 's/CURRVERSION/'${CurrVersion}'/g' route-traffic-50-10.yaml
+                      sed -i -e 's/CURRVERSION/'${CurrVersion}'/g' route-traffic-50-50.yaml
                       sed -i -e 's/CURRVERSION/'${CurrVersion}'/g' route-traffic-0-100.yaml
                       curl -L https://git.io/getLatestIstio | sh -
                       kubectl apply -f istio-0.5.1/install/kubernetes/istio.yaml
