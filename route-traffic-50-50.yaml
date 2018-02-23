@@ -8,7 +8,7 @@ spec:
   route:
   - labels:
       version: vCURRVERSION
-    weight: 90
+    weight: 50
   - labels:
       version: vNEWVERSION
-    weight: 10
+    weight: 50
