@@ -22,7 +22,7 @@ pipeline {
                 sudo docker login -u $USERNAME -p $PASSWORD
                 sudo docker tag nodejs-image-new ${image}:${VERSION}
                 sudo docker push ${image}:${VERSION}
-                sed -i -e 's/IMGVERSION/'${VERSION}'/g' helloworld.yaml
+                sed -i -e 's/IMGVERSION/'${VERSION}'/g' helloworld-deploy.yaml
                 '''
                }   
             }
