@@ -1,5 +1,10 @@
 pipeline {
    agent any
+   
+   environment {
+       image = "pavanraj29/helloworld"
+      VERSION = "${BUILD_ID}"
+   }
   
     stages
        {
@@ -30,8 +35,8 @@ pipeline {
                       sleep 20
                       export PATH=$PWD/istio-0.5.1/bin:$PATH
                       kubectl get all -n istio-system
-                      istioctl kube-inject -f helloworld-v2.yaml
-                      kubectl apply -f helloworld-v2.yaml
+                      istioctl kube-inject -f helloworld-deploy.yaml
+                      kubectl apply -f helloworld-deploy.yaml
                       kubectl apply -f helloworld-svc.yaml
                       istioctl replace -f route-traffic.yaml
                       sleep 60
