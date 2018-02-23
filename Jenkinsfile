@@ -67,7 +67,7 @@ pipeline {
                       for i in {1..20}; do curl $INGRESS_URL/hello >>tmp; done
                       cat tmp
                       //removing old version
-                      kubectl delete pods,services -l version=v${CurrVersion}
+                      kubectl delete pods -l version=v${CurrVersion}
                       '''
         }
      }
