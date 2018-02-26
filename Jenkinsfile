@@ -4,6 +4,7 @@ pipeline {
    environment {
        image = "pavanraj29/helloworld"
       VERSION = "${BUILD_ID}"
+      CurrVersion = "pre"
    }
   
     stages
@@ -33,7 +34,7 @@ pipeline {
            stage("ISTIO Deployment") {
                steps {
                sh ''' 
-                      CurrVersion=`kubectl get deploy helloworld -o jsonpath="{.spec.selector.matchLabels.version}"`
+                      //CurrVersion=`kubectl get deploy helloworld -o jsonpath="{.spec.selector.matchLabels.version}"`
                       sed -i -e 's/CURRVERSION/'${CurrVersion}'/g' route-traffic-90-10.yaml
                       sed -i -e 's/CURRVERSION/'${CurrVersion}'/g' route-traffic-50-50.yaml
                       sed -i -e 's/CURRVERSION/'${CurrVersion}'/g' route-traffic-0-100.yaml
