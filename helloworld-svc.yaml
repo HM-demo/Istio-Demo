@@ -23,7 +23,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /hello
+      - path: /
         backend:
           serviceName: helloworld
           servicePort: 5000
