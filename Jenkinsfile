@@ -4,7 +4,7 @@ pipeline {
    environment {
        image = "pavanraj29/helloworld"
       VERSION = "${BUILD_ID}"
-      CurrVersion = "7"
+      CurrVersion = "8"
    }
   
     stages
@@ -55,14 +55,14 @@ pipeline {
                       #routing traffic to 50-50
                       istioctl replace -f route-traffic-50-50.yaml
                       rm tmp
-                      sleep 30
+                      sleep 60
                       INGRESS_URL=`kubectl get ingress helloworld -o jsonpath="{.status.loadBalancer.ingress[0].*}"`
                       for i in {1..20}; do curl $INGRESS_URL/ >>tmp; done
                       cat tmp
                       #routing all traffic to new version
                       istioctl replace -f route-traffic-50-50.yaml
                       rm tmp
-                      sleep 30
+                      sleep 60
                       INGRESS_URL=`kubectl get ingress helloworld -o jsonpath="{.status.loadBalancer.ingress[0].*}"`
                       for i in {1..20}; do curl $INGRESS_URL/ >>tmp; done
                       cat tmp
