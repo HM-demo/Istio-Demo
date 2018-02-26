@@ -9,8 +9,7 @@ pipeline {
        string(defaultValue: '', description: 'docker image name', name: 'image')
     }
    environment {
-       image = "pavanraj29/helloworld"
-      VERSION = "${BUILD_ID}"
+       VERSION = "${BUILD_ID}"
    }
   
     stages
