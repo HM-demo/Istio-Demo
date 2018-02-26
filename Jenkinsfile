@@ -4,7 +4,7 @@ pipeline {
    environment {
        image = "pavanraj29/helloworld"
       VERSION = "${BUILD_ID}"
-      CurrVersion = "8"
+      CurrVersion = "9"
    }
   
     stages
