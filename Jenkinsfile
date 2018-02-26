@@ -1,10 +1,12 @@
 pipeline {
    agent any
    
+   parameters {
+       string(defaultValue: '', description: 'current app version', name: 'CurrVersion')
+    }
    environment {
        image = "pavanraj29/helloworld"
       VERSION = "${BUILD_ID}"
-      CurrVersion = "10"
    }
   
     stages
