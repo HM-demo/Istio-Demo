@@ -6,6 +6,7 @@ pipeline {
    }
    parameters {
        string(defaultValue: '', description: 'current app version', name: 'CurrVersion')
+       string(defaultValue: '', description: 'docker image name', name: 'image')
     }
    environment {
        image = "pavanraj29/helloworld"
