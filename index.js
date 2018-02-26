@@ -5,7 +5,7 @@ app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
 
 app.get('/', function(request, response) {
-  response.send('canary deployment with istio-v2!')
+  response.send('canary deployment with istio-v3!')
 })
 
 app.listen(app.get('port'), function() {
