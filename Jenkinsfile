@@ -45,28 +45,28 @@ pipeline {
                       istioctl kube-inject -f helloworld-deploy.yaml
                       kubectl apply -f helloworld-deploy.yaml
                       kubectl apply -f helloworld-svc.yaml
-                      //routing 10% of traffic to new version
+                      #routing 10% of traffic to new version
                       istioctl replace -f route-traffic-90-10.yaml
                       sleep 30
-                      //perform tests
+                      #perform tests
                       INGRESS_URL=`kubectl get ingress helloworld -o jsonpath="{.status.loadBalancer.ingress[0].*}"`
                       for i in {1..20}; do curl $INGRESS_URL/hello >>tmp; done
                       cat tmp
-                      //routing traffic to 50-50
+                      #routing traffic to 50-50
                       istioctl replace -f route-traffic-50-50.yaml
                       rm tmp
                       sleep 30
                       INGRESS_URL=`kubectl get ingress helloworld -o jsonpath="{.status.loadBalancer.ingress[0].*}"`
                       for i in {1..20}; do curl $INGRESS_URL/hello >>tmp; done
                       cat tmp
-                      //routing all traffic to new version
+                      #routing all traffic to new version
                       istioctl replace -f route-traffic-50-50.yaml
                       rm tmp
                       sleep 30
                       INGRESS_URL=`kubectl get ingress helloworld -o jsonpath="{.status.loadBalancer.ingress[0].*}"`
                       for i in {1..20}; do curl $INGRESS_URL/hello >>tmp; done
                       cat tmp
-                      //removing old version
+                      #removing old version
                       kubectl delete pods -l version=v${CurrVersion}
                       '''
         }
