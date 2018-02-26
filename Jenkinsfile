@@ -1,6 +1,9 @@
 pipeline {
    agent any
    
+   options {
+    buildDiscarder(logRotator(numToKeepStr: '5'))
+   }
    parameters {
        string(defaultValue: '', description: 'current app version', name: 'CurrVersion')
     }
