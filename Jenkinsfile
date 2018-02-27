@@ -5,8 +5,8 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '5'))
    }
    parameters {
-       string(defaultValue: '', description: 'current app version', name: 'CurrVersion')
-       string(defaultValue: '', description: 'docker image name', name: 'image')
+       string(defaultValue: 'pre', description: 'current app version', name: 'CurrVersion')
+       string(defaultValue: 'pavanraj29/hello-world', description: 'docker image name', name: 'image')
     }
    environment {
        VERSION = "${BUILD_ID}"
