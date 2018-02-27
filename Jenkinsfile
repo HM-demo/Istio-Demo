@@ -57,21 +57,21 @@ pipeline {
                       sleep 60
                       #perform tests
                       INGRESS_URL=`kubectl get ingress helloworld -o jsonpath="{.status.loadBalancer.ingress[0].*}"`
-                      for i in {1..20}; do curl $INGRESS_URL/ >>tmp; done
+                      for i in `seq 1 20`; do curl $INGRESS_URL/ >>tmp; done
                       cat tmp
                       #routing traffic to 50-50
                       istioctl replace -f route-traffic-50-50.yaml
                       rm tmp
                       sleep 60
                       INGRESS_URL=`kubectl get ingress helloworld -o jsonpath="{.status.loadBalancer.ingress[0].*}"`
-                      for i in {1..20}; do curl $INGRESS_URL/ >>tmp; done
+                      for i in `seq 1 20`; do curl $INGRESS_URL/ >>tmp; done
                       cat tmp
                       #routing all traffic to new version
                       istioctl replace -f route-traffic-0-100.yaml
                       rm tmp
                       sleep 60
                       INGRESS_URL=`kubectl get ingress helloworld -o jsonpath="{.status.loadBalancer.ingress[0].*}"`
-                      for i in {1..20}; do curl $INGRESS_URL/ >>tmp; done
+                      for i in `seq 1 20`; do curl $INGRESS_URL/ >>tmp; done
                       cat tmp
                       #removing old version
                       kubectl delete deploy helloworld-${CurrVersion}
