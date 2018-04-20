@@ -6,7 +6,7 @@ pipeline {
    }
    parameters {
        string(defaultValue: 'pre', description: 'current app version', name: 'CurrVersion')
-       string(defaultValue: 'pavanraj29/helloworld', description: 'docker image name', name: 'image')
+       string(defaultValue: 'hmdemo/helloworld', description: 'docker image name', name: 'image')
     }
    environment {
        VERSION = "${BUILD_ID}"
@@ -23,7 +23,7 @@ pipeline {
         }
            stage("Docker Tag&Push") {
             steps {
-               withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'Dockercreds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+               withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'HMDockerCreds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
                 sh '''
                 sudo docker login -u $USERNAME -p $PASSWORD
                 sudo docker tag nodejs-image-new ${image}:${VERSION}
