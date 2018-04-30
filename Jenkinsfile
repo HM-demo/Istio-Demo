@@ -44,9 +44,9 @@ pipeline {
                       sed -i -e 's/CURRVERSION/'${CurrVersion}'/g' route-traffic-0-100.yaml
                       # installing Istio
                       curl -L https://git.io/getLatestIstio | sh -
-                      kubectl apply -f istio-0.5.1/install/kubernetes/istio.yaml
+                      kubectl apply -f istio-0.7.1/install/kubernetes/istio.yaml
                       sleep 20
-                      export PATH=$PWD/istio-0.5.1/bin:$PATH
+                      export PATH=$PWD/istio-0.7.1/bin:$PATH
                       kubectl get all -n istio-system
                       #deploying app with latest code
                       istioctl kube-inject -f helloworld-deploy.yaml
